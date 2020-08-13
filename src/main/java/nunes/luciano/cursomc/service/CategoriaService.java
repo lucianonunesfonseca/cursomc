@@ -3,6 +3,7 @@ package nunes.luciano.cursomc.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import nunes.luciano.cursomc.domain.Categoria;
@@ -29,6 +30,16 @@ public class CategoriaService {
 	public Categoria Update(Categoria obj) {
 		Find(obj.getId());
 		return categoriaRepository.save(obj);
+		
+	}
+	
+	public void Delete(Integer id) {
+		Find(id); 
+		try {
+			categoriaRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new nunes.luciano.cursomc.service.exceptions.DataIntegrityViolationException("Não é possivel excluir uma categoria que possui produtos");
+		}
 		
 	}
 }
