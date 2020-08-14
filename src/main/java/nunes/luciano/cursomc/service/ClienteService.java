@@ -45,7 +45,7 @@ public class ClienteService {
 		try {
 			clienteRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new nunes.luciano.cursomc.service.exceptions.DataIntegrityViolationException("Não é possivel excluir uma categoria que possui produtos");
+			throw new nunes.luciano.cursomc.service.exceptions.DataIntegrityViolationException("Não é possivel excluir um Cliente que possui pedidos");
 		}
 		
 	}

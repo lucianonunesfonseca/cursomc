@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import nunes.luciano.cursomc.domain.Categoria;
+import nunes.luciano.cursomc.domain.Cliente;
 import nunes.luciano.cursomc.dto.CategoriaDTO;
 import nunes.luciano.cursomc.repositories.CategoriaRepository;
 import nunes.luciano.cursomc.service.exceptions.ObjectNotFoundException;
@@ -32,9 +33,11 @@ public class CategoriaService {
 		return categoriaRepository.save(obj);
 	}
 	
-	public Categoria Update(Categoria obj) {
-		Find(obj.getId());
-		return categoriaRepository.save(obj);
+public Categoria Update(Categoria obj) {
+		
+		Categoria newObjt = Find(obj.getId());
+		updateData(newObjt,obj);
+		return categoriaRepository.save(newObjt);
 		
 	}
 	
@@ -59,5 +62,10 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(),objDto.getNome());
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+		
 	}
 }
