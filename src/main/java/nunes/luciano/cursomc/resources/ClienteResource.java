@@ -1,5 +1,6 @@
 package nunes.luciano.cursomc.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import nunes.luciano.cursomc.domain.Cliente;
 import nunes.luciano.cursomc.dto.ClienteDTO;
+import nunes.luciano.cursomc.dto.ClienteNewDTO;
 import nunes.luciano.cursomc.service.ClienteService;
 
 @RestController 
@@ -32,6 +35,14 @@ public class ClienteResource {
 		Cliente obj = clienteService.Find(id);
 		return ResponseEntity.ok().body(obj);
 		
+	}
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
+		Cliente obj = clienteService.fromDTO(objDto);
+		obj = clienteService.Insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)

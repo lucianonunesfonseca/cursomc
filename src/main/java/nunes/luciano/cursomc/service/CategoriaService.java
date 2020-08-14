@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import nunes.luciano.cursomc.domain.Categoria;
-import nunes.luciano.cursomc.domain.Cliente;
 import nunes.luciano.cursomc.dto.CategoriaDTO;
 import nunes.luciano.cursomc.repositories.CategoriaRepository;
 import nunes.luciano.cursomc.service.exceptions.ObjectNotFoundException;
