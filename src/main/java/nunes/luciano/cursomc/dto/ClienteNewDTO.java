@@ -2,24 +2,51 @@ package nunes.luciano.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import nunes.luciano.cursomc.service.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 100, message = "O campo devera ter emtre 5 a 100 caracteres")
 	private String nome;
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 100, message = "O campo devera ter emtre 5 a 200 caracteres")
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento Obrigatório")
 	private String cpfOuCnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 100, message = "O campo devera ter emtre 5 a 200 caracteres")
 	private String logradouro;
+	
 	private String numero;
+	
 	private String complemento;
+	
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 100, message = "O campo devera ter emtre 5 a 100 caracteres")
 	private String bairro;
+	
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 100, message = "O campo devera ter emtre 5 a 100 caracteres")
 	private String cep;
 	
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 100, message = "O campo devera ter 15 caracteres")
 	private String telefone;
+	
 	private String telefone1;
+	
 	private String telefone2;
 	
 	private Integer cidadeId;
